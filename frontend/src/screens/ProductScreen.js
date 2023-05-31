@@ -1,7 +1,7 @@
 import React from "react";
-import data from "../data";
 import { useParams, Link } from "react-router-dom";
 import Rating from "../components/Rating";
+import data from "../data";
 
 const ProductScreen = () => {
   const { id } = useParams();
