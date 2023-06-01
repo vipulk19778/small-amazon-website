@@ -3,6 +3,7 @@ import Product from "../components/Product";
 import axios from "axios";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
+import { Helmet } from "react-helmet-async";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -38,6 +39,9 @@ const HomeScreen = () => {
   }, []);
   return (
     <div>
+      <Helmet>
+        <title>Amazon Clone</title>
+      </Helmet>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
