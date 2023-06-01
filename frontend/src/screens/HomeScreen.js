@@ -1,24 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer } from "react";
 import Product from "../components/Product";
 import axios from "axios";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "FETCH_REQUEST":
+      return { ...state, loading: true };
+    case "FETCH_SUCCESS":
+      return { ...state, loading: false, products: action.payload };
+    case "FETCH_FAIL":
+      return { ...state, loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
 const HomeScreen = () => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [{ loading, error, products }, dispatch] = useReducer(reducer, {
+    loading: true,
+    error: "",
+    products: [],
+  });
 
   useEffect(() => {
     const fetchData = async () => {
+      dispatch({ type: "FETCH_REQUEST" });
       try {
-        setLoading(true);
-        const { data } = await axios.get("/api/products");
-        setLoading(false);
-        setProducts(data);
+        const result = await axios.get("/api/products");
+        dispatch({ type: "FETCH_SUCCESS", payload: result.data });
       } catch (err) {
-        setError(err.message);
-        setLoading(false);
+        dispatch({ type: "FETCH_FAIL", payload: err.message });
       }
     };
     fetchData();
@@ -32,7 +45,7 @@ const HomeScreen = () => {
       ) : (
         <div className="flex flex-wrap justify-center">
           {products.map((product) => (
-            <Product key={product._id} product={product}></Product>
+            <Product key={product.slug} product={product}></Product>
           ))}
         </div>
       )}
