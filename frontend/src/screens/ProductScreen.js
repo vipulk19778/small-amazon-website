@@ -4,8 +4,9 @@ import Rating from "../components/Rating";
 import data from "../data";
 
 const ProductScreen = () => {
-  const { id } = useParams();
-  const product = data.products.find((x) => x._id === parseInt(id));
+  const params = useParams();
+  const { slug } = params;
+  const product = data.products.find((x) => x.slug === slug);
   if (!product) {
     return <div>Product Not Found</div>;
   }

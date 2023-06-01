@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import ProductScreen from "./screens/ProductScreen";
 import HomeScreen from "./screens/HomeScreen";
 
@@ -9,20 +9,20 @@ function App() {
       <div className="grid-container">
         <header className="flex justify-between mb-4 items-center">
           <div>
-            <a href="/" className="brand">
+            <Link to="/" className="brand">
               Amazona
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="/cart" className="mr-4">
+            <Link to="/cart" className="mr-4">
               Cart
-            </a>
-            <a href="/signin">Sign In</a>
+            </Link>
+            <Link to="/signin">Sign In</Link>
           </div>
         </header>
         <main>
           <Routes>
-            <Route path="/product/:id" element={<ProductScreen />} />
+            <Route path="/product/:slug" element={<ProductScreen />} />
             <Route path="/" element={<HomeScreen />} />
           </Routes>
         </main>
