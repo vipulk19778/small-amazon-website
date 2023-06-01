@@ -5,6 +5,7 @@ import axios from "axios";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import { Helmet } from "react-helmet-async";
+import { getError } from "../utils";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -36,7 +37,7 @@ const ProductScreen = () => {
         const result = await axios.get(`/api/products/slug/${slug}`);
         dispatch({ type: "FETCH_SUCCESS", payload: result.data });
       } catch (err) {
-        dispatch({ type: "FETCH_FAIL", payload: err.message });
+        dispatch({ type: "FETCH_FAIL", payload: getError(err) });
       }
     };
     fetchData();
@@ -51,7 +52,7 @@ const ProductScreen = () => {
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
-        <MessageBox></MessageBox>
+        <MessageBox>{error}</MessageBox>
       ) : (
         <div className="lg:flex">
           <div className="lg:w-[40%] lg:mr-[5%] items-start lg:px-10">
