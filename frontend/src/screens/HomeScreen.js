@@ -43,7 +43,7 @@ const HomeScreen = () => {
         <title>Amazon Clone</title>
       </Helmet>
       {loading ? (
-        <LoadingBox></LoadingBox>
+        <LoadingBox />
       ) : error ? (
         <MessageBox>{error}</MessageBox>
       ) : (

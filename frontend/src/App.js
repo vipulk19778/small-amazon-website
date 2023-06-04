@@ -2,8 +2,12 @@ import "./App.css";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import ProductScreen from "./screens/ProductScreen";
 import HomeScreen from "./screens/HomeScreen";
+import { useContext } from "react";
+import { Store } from "./Store";
 
 function App() {
+  const { state } = useContext(Store);
+  const { cart } = state;
   return (
     <BrowserRouter>
       <div className="grid-container">
@@ -16,6 +20,11 @@ function App() {
           <div>
             <Link to="/cart" className="mr-4">
               Cart
+              {cart.cartItems.length > 0 ? (
+                <span className="bg-[red] text-[white] ml-2 px-2 rounded-md">
+                  {cart.cartItems.length}
+                </span>
+              ) : null}
             </Link>
             <Link to="/signin">Sign In</Link>
           </div>
