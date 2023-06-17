@@ -22,7 +22,7 @@ function App() {
               Cart
               {cart.cartItems.length > 0 ? (
                 <span className="bg-[red] text-[white] ml-2 px-2 rounded-md">
-                  {cart.cartItems.length}
+                  {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
                 </span>
               ) : null}
             </Link>
