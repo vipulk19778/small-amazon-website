@@ -58,3 +58,13 @@ footer {
   align-items: center;
   justify-content: center;
 }
+
+.checkout-steps > div {
+  border-bottom: 2px solid #a0a0a0;
+  color: #a0a0a0;
+}
+
+.checkout-steps > div.active {
+  border-bottom: 3px solid #f08000;
+  color: #f08000;
+}
