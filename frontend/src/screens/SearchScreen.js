@@ -96,7 +96,7 @@ const SearchScreen = () => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `/api/products/search?page=${page}&query=${query}&category=${category}&price=${price}&order=${order}`
+          `/api/products/search?page=${page}&query=${query}&category=${category}&price=${price}&rating=${rating}&order=${order}`
         );
         dispatch({ type: "FETCH_SUCCESS", payload: data });
       } catch (err) {
@@ -141,7 +141,7 @@ const SearchScreen = () => {
               <ListItem sx={{ fontWeight: "all" === category ? "bold" : "" }}>
                 <Link to={getFilterUrl({ category: "all" })}>Any</Link>
               </ListItem>
-              {categories.map((c) => (
+              {categories?.map((c) => (
                 <ListItem
                   key={c}
                   sx={{ fontWeight: c === category ? "bold" : "" }}
