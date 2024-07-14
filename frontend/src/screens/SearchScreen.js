@@ -172,8 +172,10 @@ const SearchScreen = () => {
             <List>
               {ratings?.map((r) => (
                 <ListItem
-                  key={r?.name}
-                  sx={{ fontWeight: r?.rating === rating ? "bold" : "" }}
+                  key={r?.rating}
+                  sx={{
+                    fontWeight: r?.rating === Number(rating) ? "bold" : "",
+                  }}
                 >
                   <Link to={getFilterUrl({ rating: r?.rating })}>
                     <Rating caption={" & up"} rating={r?.rating}></Rating>
